@@ -5,22 +5,23 @@ var request = require("request");
 
 app.use(express.json())
 
+const url = "http://notes_service:5001/"
+
 const courses = [
     {id: 1, name: 'course1', active: true, price: 10, notes: []},
     {id: 2, name: 'course2', active: false, price: 9, notes: []},
     {id: 3, name: 'course3', active: true, price: 7, notes: []}
 ]
+
 let notes = []
-request("http://notes_service:5001/notes", function (error, response, body) {
+request(url + "notes", function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            // Print out the response body
             notes = body
-            console.log(body)
         }
 })
 
 app.get('/', (req, res) => {
-    res.send(notes + '2 Task. localhost:8000/api/courses/ ')
+    res.send('2 Task.')
 })
 
 app.get('/api/courses', (req, res) => {
@@ -102,7 +103,7 @@ app.post('/api/courses/:id/notes', (req, res) => {
         comment: req.body.comment,
         expiration: req.body.expiration
     }
-    request.post('http://notes_service:5001/notes', {
+    request.post(url + "notes", {
     json: note
     }, (error, res, body) => {
     if (error) {
@@ -124,7 +125,7 @@ app.get('/api/courses/:id/notes', (req, res) => {
 })
 
 app.delete('/api/courses/:id/notes/:note_title', (req, res) => {
-    const note = courses[req.params.id-1].notes.find(c => c.title === req.params.notes_title)
+    const note = courses[req.params.id-1].notes.find(c => c.title === req.params.note_title)
     if(!note) return res.status(404).send('The note with given title was not found')
     courses[req.params.id-1].notes.splice(note, 1)
     res.send(note)
