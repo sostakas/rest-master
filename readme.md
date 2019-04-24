@@ -1,15 +1,17 @@
 # rest-master
+	git clone
 git clone git@github.com:sostakas/rest-master.git
 
-<!-- build -->
+	build
 sh {path start.sh}
-<!-- clean -->
+
+	clean
 sh {path close.sh}
 
-<!-- url -->
+	url
 0.0.0.0:4200
 
-<!-- 1 task -->
+	1 task
 GET {url}/api/courses
 
 GET {url}/api/courses/{id}
@@ -23,27 +25,27 @@ PATCH {url}/api/courses/{id}
 DELETE {url}/api/courses/{id}
 
 
-<!-- 2 task -->
+	2 task
 POST {url}/api/courses/{id}/notes 
 
-{
-	"title": "ha",
-	"author": "petras",
-	"comment": "labai idomus kursas",
-	"expiration": "13-3-32-3"
-}
+	{
+		"title": "ha",
+		"author": "petras",
+		"comment": "labai idomus kursas",
+		"expiration": "13-3-32-3"
+	}
 
 
 GET {url}/api/courses/{id}/notes 
 
-[
-    {
-        "title": "ha",
-		"author": "petras",
-		"comment": "labai idomus kursas",
-		"expiration": "13-3-32-3"
-    }
-]
+	[
+		{
+			"title": "ha",
+			"author": "petras",
+			"comment": "labai idomus kursas",
+			"expiration": "13-3-32-3"
+		}
+	]
 
 DELETE {url}/api/courses/{id}/notes/{note_title} 
 
