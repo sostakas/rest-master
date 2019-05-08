@@ -5,7 +5,7 @@ services:
     ports:
       - "5000:8000"
   notes_service:
-    build: Notes
+    build: Notes_service
     command: python app.py
     ports:
       - "5001:5001"

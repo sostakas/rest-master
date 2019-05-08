@@ -9,44 +9,56 @@ const url = "http://notes_service:5001/"
 
 const courses = [
     {id: 1, name: 'course1', active: true, price: 10, notes: [
-        {
-        "title": "ha",
-        "author": "petras",
-        "comment": "labai idomus kursas",
-        "expiration": "13-3-32-3"
-        }  
+
     ]},
     {id: 2, name: 'course2', active: false, price: 9, notes: [
-        {
-            "title": "ha",
-            "author": "Jonas",
-            "comment": "labai neidomus kursas",
-            "expiration": "13-3-32-3"
-        }
+   
     ]},
     {id: 3, name: 'course3', active: true, price: 7, notes: [
-        {
-            "title": "ha",
-            "author": "petras",
-            "comment": "labai vidutiniskas kursas",
-            "expiration": "13-3-32-3"
-        }
+
     ]}
 ]
 
 let notes = []
-request(url + "notes", function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            notes = body
-        }
-})
 
 app.get('/', (req, res) => {
-    res.send('2 Task.')
+
+    res.send("2 task")
 })
 
 app.get('/api/courses', (req, res) => {
+
+
+    request(url + "notes", function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            notes = body
+            var json = JSON.parse(JSON.stringify(notes));
+            var a = JSON.parse(json)
+
+            if(courses[0].notes.length == 0 ) {
+                courses[0].notes.push(a.data.find(c => c.title == "Pirkiniai"))
+                courses[1].notes.push(a.data.find(c => c.title == "Atostogos"))
+                courses[2].notes.push(a.data.find(c => c.title == "Dienotvarke"))
+            }
+        }
+    })
+
     res.send(courses)
+
+    const course = courses[0].notes.find(c => c.title == "Pirkiniai")
+    const course1 = courses[1].notes.find(c => c.title == "Atostogos")
+    const course2 = courses[2].notes.find(c => c.title == "Dienotvarke")
+
+    const index = courses[0].notes.indexOf(course)
+    const index2 = courses[1].notes.indexOf(course1)
+    const index3 = courses[2].notes.indexOf(course2)
+
+
+    courses[0].notes.splice(index, 1)
+    courses[1].notes.splice(index2, 1)
+    courses[2].notes.splice(index3, 1)
+
+
 })
 
 app.get('/api/courses/:id', (req, res) => {
