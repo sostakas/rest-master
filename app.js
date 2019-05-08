@@ -8,9 +8,30 @@ app.use(express.json())
 const url = "http://notes_service:5001/"
 
 const courses = [
-    {id: 1, name: 'course1', active: true, price: 10, notes: []},
-    {id: 2, name: 'course2', active: false, price: 9, notes: []},
-    {id: 3, name: 'course3', active: true, price: 7, notes: []}
+    {id: 1, name: 'course1', active: true, price: 10, notes: [
+        {
+        "title": "ha",
+        "author": "petras",
+        "comment": "labai idomus kursas",
+        "expiration": "13-3-32-3"
+        }  
+    ]},
+    {id: 2, name: 'course2', active: false, price: 9, notes: [
+        {
+            "title": "ha",
+            "author": "Jonas",
+            "comment": "labai neidomus kursas",
+            "expiration": "13-3-32-3"
+        }
+    ]},
+    {id: 3, name: 'course3', active: true, price: 7, notes: [
+        {
+            "title": "ha",
+            "author": "petras",
+            "comment": "labai vidutiniskas kursas",
+            "expiration": "13-3-32-3"
+        }
+    ]}
 ]
 
 let notes = []

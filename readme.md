@@ -3,13 +3,10 @@
 git clone git@github.com:sostakas/rest-master.git
 
 	build
-sh {path start.sh}
-
-	clean
-sh {path close.sh}
+docker-compose up --build -d
 
 	url
-0.0.0.0:4200
+0.0.0.0:5000
 
 	1 task
 GET {url}/api/courses

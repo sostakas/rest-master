@@ -3,10 +3,9 @@ services:
   web:
     build: .
     ports:
-      - "4200:8000"
-    container_name: courses_service
-
-networks: 
-  default:
-    external:
-      name: ws_bridge
+      - "5000:8000"
+  notes_service:
+    build: Notes
+    command: python app.py
+    ports:
+      - "5001:5001"
